@@ -1,0 +1,40 @@
+@startuml
+database DataStore
+actor Client
+
+Client -> RequestReceiver : Auth Request
+
+alt Vailid Auth
+    Client <- RequestReceiver : Auth Success
+    Client -> RequestReceiver : Request <<REST>>
+    RequestReceiver -> Coordinator: Request
+    Coordinator -> DataStore: Request Log
+
+    alt Valid Request
+        Coordinator -> ThridPartyQuerier: Request
+        ThridPartyQuerier -> DataSource : Request <<REST>>
+
+        group neg
+            ThridPartyQuerier -->> ThridPartyQuerier : timeount
+            Coordinator <- ThridPartyQuerier : Response <<error>>
+            Coordinator -> DataStore: Error Log
+            RequestReceiver <- Coordinator: Response <<error>>
+            Client <- RequestReceiver : Response <<REST>> <<error>>
+        end
+
+        ThridPartyQuerier <- DataSource : Response <<REST>>
+        Coordinator <- ThridPartyQuerier: Response
+        Coordinator -> DataStore: Response Log
+        RequestReceiver <- Coordinator: Response
+        Client <- RequestReceiver : Response <<REST>>
+
+    else Invalid Request
+        Coordinator -> DataStore: Error Log
+        RequestReceiver <- Coordinator: Response <<error>>
+        Client <- RequestReceiver : Response <<REST>> <<error>>
+
+    end
+else Invalid Auth
+    Client <- RequestReceiver : Auth Failure
+end
+@enduml

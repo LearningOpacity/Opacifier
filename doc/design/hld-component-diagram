@@ -1,0 +1,23 @@
+@startuml
+() "Secure Endpoint" as SecEnd
+
+node "Secure Gateway" <<Docker Container>> {
+  component RequestReceiver
+  component Coordinator
+  component ThirdPartyQuerier
+
+  RequestReceiver -right- Coordinator
+  Coordinator -right- ThirdPartyQuerier
+}
+
+node "DataStore" <<Docker Container>> {
+  database Database
+}
+
+cloud "3rd Party Data Source" as DataSource
+
+Coordinator -down- Database : event logging
+
+RequestReceiver -left- SecEnd : <<REST>>
+ThirdPartyQuerier <-right-> DataSource : <<REST>>
+@enduml
