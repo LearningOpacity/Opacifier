@@ -7,6 +7,8 @@
     "doc": "doc"
   },
   "scripts": {
+    "build": "npm run lint-fix && npm run gen-doc && npm run test",
+    "gen-doc": "jsdoc src/*",
     "lint": "eslint src",
     "lint-fix": "eslint src --fix",
     "test": "test"
@@ -26,6 +28,7 @@
   },
   "devDependencies": {
     "eslint": "^7.0.0",
-    "eslint-config-google": "^0.14.0"
+    "eslint-config-google": "^0.14.0",
+    "jsdoc": "^3.6.4"
   }
 }
