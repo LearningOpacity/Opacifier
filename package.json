@@ -1,0 +1,31 @@
+{
+  "name": "opacifier",
+  "version": "1.0.0",
+  "description": "An Opacifier",
+  "main": "src/index.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "lint": "eslint src",
+    "lint-fix": "eslint src --fix",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LearningOpacity/Opacifier.git"
+  },
+  "author": "Evan Plett",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LearningOpacity/Opacifier/issues"
+  },
+  "homepage": "https://github.com/LearningOpacity/Opacifier#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.0.0",
+    "eslint-config-google": "^0.14.0"
+  }
+}
