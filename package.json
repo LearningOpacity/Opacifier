@@ -11,7 +11,7 @@
     "gen-doc": "jsdoc src/*",
     "lint": "eslint src",
     "lint-fix": "eslint src --fix",
-    "test": "test"
+    "test": "mocha 'test/**/*.js'"
   },
   "repository": {
     "type": "git",
@@ -29,6 +29,7 @@
   "devDependencies": {
     "eslint": "^7.0.0",
     "eslint-config-google": "^0.14.0",
-    "jsdoc": "^3.6.4"
+    "jsdoc": "^3.6.4",
+    "mocha": "^7.1.2"
   }
 }
