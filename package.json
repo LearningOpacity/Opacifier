@@ -6,8 +6,9 @@
   "directories": {
     "doc": "doc"
   },
+  "type": "module",
   "scripts": {
-    "build": "npm run lint-fix && npm run gen-doc && npm run test",
+    "build": "standard --fix && npm run lint-fix && npm run gen-doc && npm run test",
     "gen-doc": "jsdoc src/*",
     "lint": "eslint src",
     "lint-fix": "eslint src --fix",
@@ -24,12 +25,16 @@
   },
   "homepage": "https://github.com/LearningOpacity/Opacifier#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "winston": "^3.2.1"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
     "eslint": "^7.0.0",
     "eslint-config-google": "^0.14.0",
+    "jest": "^26.0.1",
     "jsdoc": "^3.6.4",
-    "mocha": "^7.1.2"
+    "mocha": "^7.1.2",
+    "standard": "^14.3.4"
   }
 }
