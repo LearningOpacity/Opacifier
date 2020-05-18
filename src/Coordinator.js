@@ -10,12 +10,12 @@ class Coordinator {
    */
   static processRequest(request) {
     if (Coordinator.validateRequest(request)) {
-      logger.info('Recieved Valid Request' + request.stringify());
+      logger.info('Recieved Valid Request: ' + request.stringify());
       const response = Querier.processRequest(request);
 
       return response;
     } else {
-      logger.info('Recieved Invalid Request' + request.stringify());
+      logger.info('Recieved Invalid Request: ' + request.stringify());
     }
   }
 
