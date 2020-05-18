@@ -12,7 +12,15 @@
     "gen-doc": "jsdoc src/*",
     "lint": "eslint src",
     "lint-fix": "eslint src --fix",
-    "test": "mocha 'test/**/*.js'"
+    "test": "jest \"test/*.js\""
+  },
+  "standard": {
+    "env": [ "jest" ]
+  },
+  "jest": {
+    "testMatch": [
+        "<rootDir>/test/**/*.js"
+    ]
   },
   "repository": {
     "type": "git",
@@ -29,12 +37,10 @@
     "winston": "^3.2.1"
   },
   "devDependencies": {
-    "chai": "^4.2.0",
     "eslint": "^7.0.0",
     "eslint-config-google": "^0.14.0",
     "jest": "^26.0.1",
     "jsdoc": "^3.6.4",
-    "mocha": "^7.1.2",
     "standard": "^14.3.4"
   }
 }

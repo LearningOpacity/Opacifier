@@ -1,7 +1,7 @@
-const Coordinator = require('Coordinator');
+const Coordinator = require('./Coordinator');
 
 /** Class that recieves request from clients */
-export class Reciever {
+class Reciever {
   /**
      *
      * @param {Request} request
@@ -11,3 +11,5 @@ export class Reciever {
     return Coordinator.handleRequest(request);
   }
 }
+
+module.exports = Reciever;

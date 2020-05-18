@@ -1,5 +1,5 @@
 /** Class representing a request processed by the system */
-export class Request {
+class Request {
   /**
    * Create a request
    * @param {*} requestHost
@@ -18,3 +18,5 @@ export class Request {
     return 'A Request';
   }
 }
+
+module.exports = Request;

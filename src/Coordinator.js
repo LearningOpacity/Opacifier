@@ -1,8 +1,8 @@
-const logger = require('logging_config').logger;
-const Querier = require('Querier');
+const logger = require('./logging_config');
+const Querier = require('./Querier');
 
 /** Class that coordinates requests */
-export class Coordinator {
+class Coordinator {
   /**
    * Process a request
    * @param {Request} request
@@ -24,7 +24,9 @@ export class Coordinator {
    * @param {Request} request
    * @return {boolean} Wether or not the request is valid
    */
-  validateRequest(request) {
+  static validateRequest(request) {
     return true;
   }
 }
+
+module.exports = Coordinator;

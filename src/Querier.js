@@ -1,7 +1,7 @@
-const Response = require('Response');
+const Response = require('./Response');
 
 /** Class that queries 3rd party data sources */
-export class Querier {
+class Querier {
   /**
      * Handle a request
      * @param {Request} request
@@ -11,3 +11,5 @@ export class Querier {
     return new Response();
   }
 }
+
+module.exports = Querier;
