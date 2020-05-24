@@ -2,8 +2,8 @@
 class Request {
   /**
    * Create a request
-   * @param {*} requestHost
-   * @param {*} httpRequest
+   * @param {string} requestHost
+   * @param {string} httpRequest
    */
   constructor(requestHost, httpRequest) {
     this.requestHost = requestHost;

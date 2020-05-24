@@ -12,7 +12,7 @@
     "gen-doc": "jsdoc src/*",
     "lint": "eslint src",
     "lint-fix": "eslint src --fix",
-    "test": "jest \"test/*.js\""
+    "test": "jest --collectCoverage \"test/*.js\""
   },
   "standard": {
     "env": [ "jest" ]

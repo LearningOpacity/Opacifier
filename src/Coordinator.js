@@ -1,5 +1,6 @@
 const logger = require('./logging_config');
 const Querier = require('./Querier');
+const Response = require('./Response');
 
 /** Class that coordinates requests */
 class Coordinator {
@@ -16,6 +17,7 @@ class Coordinator {
       return response;
     } else {
       logger.info('Recieved Invalid Request: ' + request.stringify());
+      return Response.createErrorResponse('Invalid request');
     }
   }
 
@@ -25,7 +27,12 @@ class Coordinator {
    * @return {boolean} Wether or not the request is valid
    */
   static validateRequest(request) {
-    return true;
+    if (!request.requestHost ||
+        !request.httpRequest) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }
 
