@@ -6,32 +6,32 @@ Client -> RequestReceiver : Auth Request
 
 alt Vailid Auth
     Client <- RequestReceiver : Auth Success
-    Client -> RequestReceiver : Request <<REST>>
+    Client -> RequestReceiver : Request
     RequestReceiver -> Coordinator: Request
     Coordinator -> DataStore: Request Log
 
     alt Valid Request
         Coordinator -> ThridPartyQuerier: Request
-        ThridPartyQuerier -> DataSource : Request <<REST>>
+        ThridPartyQuerier -> DataSource : Request
 
         group neg
             ThridPartyQuerier -->> ThridPartyQuerier : timeount
-            Coordinator <- ThridPartyQuerier : Response <<error>>
+            Coordinator <- ThridPartyQuerier : Error
             Coordinator -> DataStore: Error Log
-            RequestReceiver <- Coordinator: Response <<error>>
-            Client <- RequestReceiver : Response <<REST>> <<error>>
+            RequestReceiver <- Coordinator: Error
+            Client <- RequestReceiver : Response {timeout}
         end
 
-        ThridPartyQuerier <- DataSource : Response <<REST>>
+        ThridPartyQuerier <- DataSource : Response
         Coordinator <- ThridPartyQuerier: Response
         Coordinator -> DataStore: Response Log
         RequestReceiver <- Coordinator: Response
-        Client <- RequestReceiver : Response <<REST>>
+        Client <- RequestReceiver : Response
 
     else Invalid Request
         Coordinator -> DataStore: Error Log
-        RequestReceiver <- Coordinator: Response <<error>>
-        Client <- RequestReceiver : Response <<REST>> <<error>>
+        RequestReceiver <- Coordinator: Error
+        Client <- RequestReceiver : Response {invalid request}
 
     end
 else Invalid Auth

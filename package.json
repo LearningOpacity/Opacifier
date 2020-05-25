@@ -8,18 +8,16 @@
   },
   "type": "module",
   "scripts": {
-    "build": "standard --fix && npm run lint-fix && npm run gen-doc && npm run test",
+    "verify": "standard --fix && eslint src --fix",
     "gen-doc": "jsdoc src/*",
-    "lint": "eslint src",
-    "lint-fix": "eslint src --fix",
-    "test": "jest --collectCoverage \"test/*.js\""
+    "test": "jest ",
+    "todo": "leasot -x 'src/*.js' 'test/**/*.js'",
+    "build": "npm run verify && npm run gen-doc && npm run test",
+    "devbuild": "npm run verify && npm run test -- -o && npm run todo"
   },
   "standard": {
-    "env": [ "jest" ]
-  },
-  "jest": {
-    "testMatch": [
-        "<rootDir>/test/**/*.js"
+    "env": [
+      "jest"
     ]
   },
   "repository": {
@@ -33,7 +31,9 @@
   },
   "homepage": "https://github.com/LearningOpacity/Opacifier#readme",
   "dependencies": {
+    "abort-controller": "^3.0.0",
     "express": "^4.17.1",
+    "node-fetch": "^2.6.0",
     "winston": "^3.2.1"
   },
   "devDependencies": {
@@ -41,6 +41,7 @@
     "eslint-config-google": "^0.14.0",
     "jest": "^26.0.1",
     "jsdoc": "^3.6.4",
+    "leasot": "^11.0.0",
     "standard": "^14.3.4"
   }
 }

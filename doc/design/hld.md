@@ -13,4 +13,4 @@ The Third Party Querier is responsible for sending queries to 3rd party data sou
 ![Component Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/LearningOpacity/Opacifier/DesignPhase/doc/design/hld-component-diagram?changethistoupdate=1)
 
 ### Sequence Diagram
-![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/LearningOpacity/Opacifier/DesignPhase/doc/design/hld-sequence-diagram?changethistoupdate=1)
+![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/LearningOpacity/Opacifier/DesignPhase/doc/design/hld-sequence-diagram?changethistoupdate=2)
