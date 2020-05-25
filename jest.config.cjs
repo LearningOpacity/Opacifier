@@ -1,5 +1,6 @@
 module.exports = {
   collectCoverage: true,
-  testMatch: ['<rootDir>/test/**/*.js'],
+  coveragePathIgnorePatterns: ['<rootDir>/test/'],
+  testMatch: ['<rootDir>/test/**/*_Test.js'],
   verbose: true
 }

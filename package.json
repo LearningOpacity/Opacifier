@@ -10,7 +10,7 @@
   "scripts": {
     "verify": "standard --fix && eslint src --fix",
     "gen-doc": "jsdoc src/*",
-    "test": "jest ",
+    "test": "jest",
     "todo": "leasot -x 'src/*.js' 'test/**/*.js'",
     "build": "npm run verify && npm run gen-doc && npm run test",
     "devbuild": "npm run verify && npm run test -- -o && npm run todo"
