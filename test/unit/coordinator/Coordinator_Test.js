@@ -11,7 +11,7 @@ describe('Coordinator', () => {
       const mockQuerierProcessRequest = jest.fn()
       Querier.processRequest = mockQuerierProcessRequest
 
-      Coordinator.processRequest(validRequest)
+      return Coordinator.processRequest(validRequest)
         .then(() => {
           expect(mockQuerierProcessRequest).toHaveBeenCalledWith(validRequest)
         })
@@ -28,7 +28,7 @@ describe('Coordinator', () => {
     test('Should log the request', () => {
       const loggerInfoSpy = jest.spyOn(Logger, 'info')
 
-      Coordinator.processRequest(validRequest)
+      return Coordinator.processRequest(validRequest)
         .then(() => {
           expect(loggerInfoSpy).toHaveBeenCalled()
         })
@@ -44,7 +44,7 @@ describe('Coordinator', () => {
     test('Should log an error', () => {
       const loggerInfoSpy = jest.spyOn(Logger, 'info')
 
-      Coordinator.processRequest(invalidRequest)
+      return Coordinator.processRequest(invalidRequest)
         .catch(() => expect(loggerInfoSpy).toHaveBeenCalled())
     })
   })

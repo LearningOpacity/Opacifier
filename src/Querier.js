@@ -1,5 +1,5 @@
-const AbortController = require('abort-controller');
 const fetch = require('node-fetch');
+const AbortController = require('abort-controller');
 
 /** Class that queries 3rd party data sources */
 class Querier {
@@ -9,7 +9,7 @@ class Querier {
      * @return {Promise<Response>} The Response
      */
   static async processRequest(request) {
-    return Querier.fetchWithTimeout(request, 5000);
+    return Querier.fetchWithTimeout(request, 2000);
   }
 
   /**
@@ -21,16 +21,13 @@ class Querier {
    */
   static async fetchWithTimeout(request, timeoutMs) {
     const controller = new AbortController();
-    const signal = controller.signal; // get signal
-    const params = {
-      method: 'GET',
-      signal, // bind controller to this fetch request using signal
-    };
 
+    if (!request.params) request.params = {};
+
+    request.params.signal = controller.signal;
     setTimeout(() => controller.abort(), timeoutMs);
 
-    return fetch(request.url, params)
-        .then((data) => data.json());
+    return fetch(request.url, request.params);
   }
 }
 
