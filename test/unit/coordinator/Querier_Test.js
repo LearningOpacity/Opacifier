@@ -26,14 +26,14 @@ describe('Quierier', () => {
     })
 
     // TODO: figure out timout. Maybe a global config?
-    test.skip('Should call timeout after 5 seconds by returning an error Response', () => {
+    test('Should call timeout after 5 seconds by returning an error Response', () => {
       fetchMock.mockResponseOnce(() => {
         sleep(3000).then(() => {
           return Promise.resolve(JSON.stringify({ data: '12345' }))
         })
       })
 
-      expect(Querier.processRequest(validRequest)).rejects.toThrow('Aborted!')
+      expect(Querier.processRequest(validRequest)).rejects.toMatch('octopus')
     })
   })
 })
