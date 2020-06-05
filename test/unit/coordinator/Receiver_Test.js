@@ -3,7 +3,7 @@ const { validRequest } = require('./Test_Common')
 
 const Receiver = require('../../../src/Receiver')
 */
-describe('Receiver', () => {
+describe.skip('Receiver', () => {
   describe('When Recieving a Request', () => {
     test('Should query the Request\'s host', () => {
       expect(true).toEqual(true)

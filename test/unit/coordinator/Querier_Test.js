@@ -1,12 +1,17 @@
 const fetchMock = require('jest-fetch-mock')
 fetchMock.enableMocks()
-const { sleep, validRequest } = require('./Test_Common')
+const { validRequest } = require('./Test_Common')
 
 const Querier = require('../../../src/Querier')
 
 describe('Quierier', () => {
   beforeEach(() => {
     fetchMock.resetMocks()
+    jest.useFakeTimers()
+  })
+
+  afterEach(() => {
+    jest.useRealTimers()
   })
 
   describe('When Recieving a Request', () => {
@@ -26,14 +31,13 @@ describe('Quierier', () => {
     })
 
     // TODO: figure out timout. Maybe a global config?
-    test('Should call timeout after 5 seconds by returning an error Response', () => {
-      fetchMock.mockResponseOnce(() => {
-        sleep(3000).then(() => {
-          return Promise.resolve(JSON.stringify({ data: '12345' }))
-        })
+    test('Should call timeout after 5 seconds by returning an error Response', async () => {
+      fetchMock.mockResponse(async () => {
+        jest.advanceTimersByTime(3000)
+        return ''
       })
 
-      expect(Querier.processRequest(validRequest)).rejects.toMatch('octopus')
+      await expect(Querier.processRequest(validRequest)).rejects.toThrow()
     })
   })
 })
