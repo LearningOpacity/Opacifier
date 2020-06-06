@@ -9,8 +9,8 @@ class Reciever {
      * @param {Request} request
      * @return {Response}
      */
-  processRequest(request) {
-    return Coordinator.handleRequest(request);
+  static async processRequest(request) {
+    return Coordinator.processRequest(request);
   }
 }
 

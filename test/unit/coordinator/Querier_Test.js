@@ -31,8 +31,17 @@ describe('Quierier', () => {
         .then(response => expect(response).toEqual(returnedData))
     })
 
-    // TODO: figure out timout. Maybe a global config?
     test('Should call timeout after 5 seconds by returning an error Response', async () => {
+      fetchMock.mockResponse(async () => {
+        jest.advanceTimersByTime(config.get('querier.timeout') + 1)
+        return ''
+      })
+
+      await expect(Querier.processRequest(validRequest)).rejects.toThrow()
+    })
+
+    // TODO: fill this in
+    test.skip('Should log after timeout', async () => {
       fetchMock.mockResponse(async () => {
         jest.advanceTimersByTime(config.get('querier.timeout') + 1)
         return ''
