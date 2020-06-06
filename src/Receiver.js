@@ -1,16 +1,22 @@
 const Coordinator = require('./Coordinator');
 
-// TODO: Use promises
-
 /** Class that recieves request from clients */
 class Reciever {
   /**
-     *
-     * @param {Request} request
-     * @return {Response}
-     */
-  static async processRequest(request) {
-    return Coordinator.processRequest(request);
+   *
+   * @param {Request} req
+   * @param {Response} res
+   * @param {function} next
+   */
+  static async processRequest(req, res, next) {
+    Coordinator.processRequest(req)
+        .then((response) => {
+          res.send(response);
+        })
+        .catch((err) => {
+          res.end();
+          res.send(`Error errno. ${err}`);
+        });
   }
 }
 

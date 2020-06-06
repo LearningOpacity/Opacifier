@@ -1,6 +1,7 @@
 const fetch = require('node-fetch');
 const AbortController = require('abort-controller');
 const config = require('config');
+const logger = require('./logging_config');
 
 /** Class that queries 3rd party data sources */
 class Querier {
@@ -27,6 +28,12 @@ class Querier {
 
     request.params.signal = controller.signal;
     setTimeout(() => controller.abort(), timeoutMs);
+
+    controller.signal.addEventListener('abort', () => {
+      logger.error(new Error(
+          `Request timed out. Timeout Timer: ${timeoutMs}. Request: 
+          ${request}`));
+    });
 
     return fetch(request.url, request.params);
   }

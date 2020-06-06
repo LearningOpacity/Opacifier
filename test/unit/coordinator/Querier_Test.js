@@ -2,8 +2,10 @@ const fetchMock = require('jest-fetch-mock')
 fetchMock.enableMocks()
 const { validRequest } = require('./Test_Common')
 const config = require('config')
-
+const logger = require('../../../src/logging_config')
 const Querier = require('../../../src/Querier')
+
+logger.transports[0].silent = true
 
 describe('Quierier', () => {
   beforeEach(() => {
@@ -41,13 +43,16 @@ describe('Quierier', () => {
     })
 
     // TODO: fill this in
-    test.skip('Should log after timeout', async () => {
+    test('Should log after timeout', async () => {
       fetchMock.mockResponse(async () => {
         jest.advanceTimersByTime(config.get('querier.timeout') + 1)
         return ''
       })
 
+      const loggerInfoSpy = jest.spyOn(logger, 'error')
+
       await expect(Querier.processRequest(validRequest)).rejects.toThrow()
+      await expect(loggerInfoSpy).toHaveBeenCalled()
     })
   })
 })

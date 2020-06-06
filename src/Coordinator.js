@@ -6,7 +6,7 @@ class Coordinator {
   /**
    * Process a request
    * @param {Request} request
-   * @return {Promise<Response>}
+   * @return {Promise<Response | Error>}
    */
   static async processRequest(request) {
     if (Coordinator.validateRequest(request)) {
