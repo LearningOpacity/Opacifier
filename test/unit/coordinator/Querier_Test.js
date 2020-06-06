@@ -1,6 +1,7 @@
 const fetchMock = require('jest-fetch-mock')
 fetchMock.enableMocks()
 const { validRequest } = require('./Test_Common')
+const config = require('config')
 
 const Querier = require('../../../src/Querier')
 
@@ -33,7 +34,7 @@ describe('Quierier', () => {
     // TODO: figure out timout. Maybe a global config?
     test('Should call timeout after 5 seconds by returning an error Response', async () => {
       fetchMock.mockResponse(async () => {
-        jest.advanceTimersByTime(3000)
+        jest.advanceTimersByTime(config.get('querier.timeout') + 1)
         return ''
       })
 

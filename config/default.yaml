@@ -1,0 +1,3 @@
+querier:
+  timeout: 5000
+  
