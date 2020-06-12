@@ -7,30 +7,50 @@ Logger.transports[0].silent = true
 
 describe('Receiver', () => {
   describe('When Recieving a Request', () => {
-    test('Should call Coordinator with the Request it recieved', () => {
-      const mockCoordinatorProcessRequest = jest.fn()
-      Coordinator.processRequest = mockCoordinatorProcessRequest
+    test('Should call Coordinator with the Request it recieved', async () => {
+      Coordinator.processRequest = jest.fn().mockResolvedValue(validResponse)
 
-      return Receiver.processRequest(validRequest)
-        .then(() => {
-          expect(mockCoordinatorProcessRequest).toHaveBeenCalledWith(validRequest)
-        })
+      const mockRes = {}
+      mockRes.send = jest.fn()
+
+      await Receiver.processRequest(validRequest, mockRes)
+      expect(Coordinator.processRequest).toHaveBeenCalledWith(validRequest)
     })
 
-    // TODO: Figure out this test
-    test.skip('Should send the response from the Coordinator', async () => {
-      const mockCoordinatorProcessRequest = jest.fn()
-      mockCoordinatorProcessRequest.mockImplementation(() => {
-        return new Promise(resolve => validResponse)
-      })
-      Coordinator.processRequest = mockCoordinatorProcessRequest
+    test('Should send the response from the Coordinator', async () => {
+      Coordinator.processRequest = jest.fn().mockResolvedValue(validResponse)
 
-      const resSend = jest.fn()
-      const res = {}
-      res.send = resSend
+      const mockRes = {}
+      mockRes.send = jest.fn()
 
-      await Receiver.processRequest(validRequest, res)
-      expect(resSend).toHaveBeenCalledWith(validRequest)
+      await Receiver.processRequest(validRequest, mockRes)
+      expect(mockRes.send).toHaveBeenCalledWith(validResponse)
+    })
+
+    test('Should not call next()', async () => {
+      Coordinator.processRequest = jest.fn().mockResolvedValue(validResponse)
+
+      const mockRes = {}
+      mockRes.send = jest.fn()
+
+      const mockNext = jest.fn()
+
+      await Receiver.processRequest(validRequest, mockRes, mockNext)
+      expect(mockNext).toHaveBeenCalledTimes(0)
+    })
+
+    // TODO: get this working
+    test('Should handle errors', async () => {
+      const theError = new Error('some text')
+      Coordinator.processRequest = jest.fn().mockImplementation(() => Promise.reject(theError))
+
+      const mockRes = {}
+      mockRes.send = jest.fn()
+      mockRes.end = jest.fn()
+
+      await Receiver.processRequest(validRequest, mockRes)
+      // expect(mockRes.end).toHaveBeenCalledTimes(1)
+      expect(mockRes.send).toHaveBeenCalledWith(theError)
     })
   })
 })
