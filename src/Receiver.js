@@ -9,7 +9,7 @@ class Reciever {
    * @param {function} next
    */
   static async processRequest(req, res, next) {
-    Coordinator.processRequest(req)
+    await Coordinator.processRequest(req)
         .then((response) => {
           res.send(response);
         })

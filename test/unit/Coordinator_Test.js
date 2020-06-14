@@ -1,6 +1,6 @@
-const Coordinator = require('../../../src/Coordinator')
-const Querier = require('../../../src/Querier')
-const Logger = require('../../../src/logging_config')
+const Coordinator = require('../../src/Coordinator')
+const Querier = require('../../src/Querier')
+const Logger = require('../../src/logging_config')
 const { invalidRequest, validRequest, validResponse } = require('./Test_Common')
 
 Logger.transports[0].silent = true

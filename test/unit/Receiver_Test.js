@@ -1,7 +1,7 @@
 const { validRequest, validResponse } = require('./Test_Common')
-const Receiver = require('../../../src/Receiver')
-const Coordinator = require('../../../src/Coordinator')
-const Logger = require('../../../src/logging_config')
+const Receiver = require('../../src/Receiver')
+const Coordinator = require('../../src/Coordinator')
+const Logger = require('../../src/logging_config')
 
 Logger.transports[0].silent = true
 
@@ -39,7 +39,6 @@ describe('Receiver', () => {
       expect(mockNext).toHaveBeenCalledTimes(0)
     })
 
-    // TODO: get this working
     test('Should handle errors', async () => {
       const theError = new Error('some text')
       Coordinator.processRequest = jest.fn().mockImplementation(() => Promise.reject(theError))
@@ -49,8 +48,9 @@ describe('Receiver', () => {
       mockRes.end = jest.fn()
 
       await Receiver.processRequest(validRequest, mockRes)
-      // expect(mockRes.end).toHaveBeenCalledTimes(1)
-      expect(mockRes.send).toHaveBeenCalledWith(theError)
+      expect(mockRes.end).toHaveBeenCalledTimes(1)
+      expect(mockRes.send).toHaveBeenCalledTimes(1)
+      expect(mockRes.send.mock.calls[0][0]).toContain(theError)
     })
   })
 })
