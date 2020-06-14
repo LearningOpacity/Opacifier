@@ -1,3 +1,7 @@
+/**
+ * @group unit
+ */
+
 const Coordinator = require('../../src/Coordinator')
 const Querier = require('../../src/Querier')
 const Logger = require('../../src/logging_config')

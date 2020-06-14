@@ -1,3 +1,7 @@
+/**
+ * @group unit
+ */
+
 const { validRequest, validResponse } = require('./Test_Common')
 const Receiver = require('../../src/Receiver')
 const Coordinator = require('../../src/Coordinator')
@@ -45,10 +49,8 @@ describe('Receiver', () => {
 
       const mockRes = {}
       mockRes.send = jest.fn()
-      mockRes.end = jest.fn()
 
       await Receiver.processRequest(validRequest, mockRes)
-      expect(mockRes.end).toHaveBeenCalledTimes(1)
       expect(mockRes.send).toHaveBeenCalledTimes(1)
       expect(mockRes.send.mock.calls[0][0]).toContain(theError)
     })

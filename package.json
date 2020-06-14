@@ -10,10 +10,11 @@
   "scripts": {
     "verify": "standard --fix && eslint src --fix",
     "gen-doc": "jsdoc src/*",
-    "test": "jest",
+    "test-unit": "jest --group=unit",
+    "test-integration": "jest --group=integration",
     "todo": "leasot -x 'src/*.js' 'test/**/*.js'",
-    "build": "npm run verify && npm run gen-doc && npm run test",
-    "devbuild": "npm run verify && npm run test -- -o && npm run todo"
+    "build": "npm run verify && npm run gen-doc && npm run test-unit && npm run test-integration",
+    "devbuild": "npm run verify && npm run test-unit -- -o && npm run todo"
   },
   "standard": {
     "env": [
@@ -44,8 +45,11 @@
     "eslint-config-google": "^0.14.0",
     "jest": "^26.0.1",
     "jest-fetch-mock": "^3.0.3",
+    "jest-runner-groups": "^2.0.1",
     "jsdoc": "^3.6.4",
     "leasot": "^11.0.0",
-    "standard": "^14.3.4"
+    "nock": "^12.0.3",
+    "standard": "^14.3.4",
+    "supertest": "^4.0.2"
   }
 }

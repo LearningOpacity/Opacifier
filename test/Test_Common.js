@@ -1,9 +1,15 @@
+/**
+ * @group unit
+ */
+
 const validRequest = {
-  url: 'http://google.com/search?q=hello'
+  url: 'http://google.com/search?q=hello',
+  originalUrl: '/http://google.com/search?q=hello'
 }
 
 const invalidRequest = {
-  url: 'http://google.com/search?q=badword'
+  url: 'http://google.com/search?q=badword',
+  originalUrl: '/http://google.com/search?q=hello'
 }
 
 class MyResponse {

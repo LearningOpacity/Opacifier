@@ -1,3 +1,7 @@
+/**
+ * @group unit
+ */
+
 const fetchMock = require('jest-fetch-mock')
 fetchMock.enableMocks()
 const { validRequest } = require('./Test_Common')
@@ -21,7 +25,7 @@ describe('Quierier', () => {
     test('Should query the Request\'s host', () => {
       const mockFetch = fetchMock.mockResponseOnce(JSON.stringify({ field: 'value' }))
       return Querier.processRequest(validRequest)
-        .then(() => expect(mockFetch).toHaveBeenCalledWith(validRequest.url, validRequest.params))
+        .then(() => expect(mockFetch).toHaveBeenCalledWith(validRequest.originalUrl.substr(1), validRequest.params))
     })
 
     test('Should return the Request\'s host\'s response', () => {

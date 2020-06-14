@@ -10,10 +10,12 @@ class Coordinator {
    */
   static async processRequest(request) {
     if (Coordinator.validateRequest(request)) {
-      logger.info('Recieved Valid Request: ' + JSON.stringify(request));
+      logger.info('Recieved Valid Request: '); //  + JSON.stringify(request)
+      //console.log('Coordinator: Processing valid Request');
       return Querier.processRequest(request);
     } else {
-      logger.info('Recieved Invalid Request: ' + JSON.stringify(request));
+      logger.info('Recieved Invalid Request: '); // + JSON.stringify(request)
+      //console.log('Coordinator: Recieved Invalud Request');
       return Promise.reject(new Error('Invalid Request'));
     }
   }
@@ -24,11 +26,13 @@ class Coordinator {
    * @return {boolean} Wether or not the request is valid
    */
   static validateRequest(request) {
-    if (request.url.includes('badword')) {
-      return false;
-    } else {
-      return true;
-    }
+    //console.log(`Coordinator: Validating request`)
+    return true;
+    // if (request.url.includes('badword')) {
+    //   return false;
+    // } else {
+    //   return true;
+    // }
   }
 }
 

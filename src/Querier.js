@@ -35,7 +35,11 @@ class Querier {
           ${request}`));
     });
 
-    return fetch(request.url, request.params);
+    const requestUrl = request.originalUrl.substr(1);
+    console.log(`Querier: Fetching ${requestUrl}`);
+    const fetchedResponse = fetch(requestUrl, request.params);
+    console.log(`Querier: Received: ` + JSON.stringify(fetchedResponse));
+    return fetchedResponse
   }
 }
 
